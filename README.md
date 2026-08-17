@@ -34,6 +34,24 @@ production, in Vietnamese. Each ends with a section naming what would prove it w
 | Measured across 12 real runs | [Lead-qualification one-pager](https://quocdungtlu.github.io/work/client-delivery/) + workspace dashboard concept |
 | Transcripts, SHA-256 hashed corpus | [Grading the grader](https://quocdungtlu.github.io/work/agent-evaluation/) — 9 runs, 2 attacks aimed at the evaluator itself |
 
+### Recent work
+
+Rebuilt daily from the GitHub API — most recently pushed repositories and where each one stands.
+
+<!-- work:start -->
+| Repo | Latest commit | Date |
+|---|---|---|
+| [agent-evaluator](https://github.com/quocdungTlu/agent-evaluator) | Add agent-evaluator: meta-agent grader with deterministic normalizer | 2026-08-17 |
+| [quocdungtlu.github.io](https://github.com/quocdungTlu/quocdungtlu.github.io) | Initial commit: portfolio site | 2026-08-17 |
+| [portfolio](https://github.com/quocdungTlu/portfolio) | fix: sửa 3 lỗi UI/UX phát hiện khi review site live | 2026-07-20 |
+| [UBNDAI](https://github.com/quocdungTlu/UBNDAI) | TTHC Assist (UBNDAI): trợ lý AI hướng dẫn và kiểm tra hồ sơ thủ tục hành chính | 2026-07-20 |
+| [C2-App-031](https://github.com/quocdungTlu/C2-App-031) | Merge pull request #116 from AI20K-Build-Cohort-2/docs/pitch-6min-4qa | 2026-07-08 |
+<!-- work:end -->
+
+<!-- releases:start -->
+
+<!-- releases:end -->
+
 ### What I don't claim
 
 No internal company data. Every analysis comes from public documentation and probes run on my own
