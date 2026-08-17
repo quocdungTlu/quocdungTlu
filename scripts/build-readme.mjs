@@ -1,7 +1,8 @@
 // Rewrites the auto-generated blocks in README.md from live GitHub data.
 //
-// Two blocks, both real data, neither decorative:
-//   <!-- work:start --> ... <!-- work:end -->        most recently pushed repos + their latest commit
+// Three blocks, all real data, none decorative:
+//   <!-- work:start --> ... <!-- work:end -->         most recently pushed repos + their latest commit
+//   <!-- essays:start --> ... <!-- essays:end -->     newest essays, from the site's Atom feed
 //   <!-- releases:start --> ... <!-- releases:end --> latest release per featured repo, omitted entirely when there are none
 //
 // It also compares the essays listed on the live site against the ones named in the README
@@ -15,6 +16,7 @@ const SITE = "https://quocdungtlu.github.io";
 const PROFILE_REPO = `${USER}/${USER}`;
 const FEATURED = ["agent-evaluator", "C2-App-031", "UBNDAI", "quocdungtlu.github.io", "portfolio"];
 const MAX_WORK_ROWS = 5;
+const MAX_ESSAY_ROWS = 4;
 
 const token = process.env.GITHUB_TOKEN;
 
@@ -92,6 +94,37 @@ async function essaysOnSite() {
   return [...html.matchAll(/href="work\/([a-z0-9-]+)\/"/g)].map((m) => m[1]);
 }
 
+const unxml = (s) =>
+  s
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, "&")
+    .trim();
+
+// The site publishes an Atom feed built from each essay's <meta name="date">.
+async function latestEssays() {
+  const res = await fetch(`${SITE}/feed.xml`, { headers: { "user-agent": `${USER}-profile-builder` } });
+  if (!res.ok) throw new Error(`GET ${SITE}/feed.xml -> ${res.status}`);
+  const feed = await res.text();
+
+  const items = [...feed.matchAll(/<entry>([\s\S]*?)<\/entry>/g)]
+    .map((m) => m[1])
+    .map((entry) => ({
+      title: unxml(entry.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? ""),
+      url: entry.match(/<link href="([^"]+)"/)?.[1] ?? "",
+      date: (entry.match(/<updated>([^<]+)<\/updated>/)?.[1] ?? "").slice(0, 10),
+    }))
+    .filter((e) => e.title && e.url);
+
+  if (!items.length) return "";
+  return items
+    .slice(0, MAX_ESSAY_ROWS)
+    .map((e) => `- [${e.title}](${e.url}) — ${e.date}`)
+    .join("\n");
+}
+
 function replaceBlock(readme, name, body) {
   const start = `<!-- ${name}:start -->`;
   const end = `<!-- ${name}:end -->`;
@@ -100,11 +133,17 @@ function replaceBlock(readme, name, body) {
   return readme.replace(re, `${start}\n${body}\n${end}`);
 }
 
-const [work, rels, siteSlugs] = await Promise.all([recentWork(), releases(), essaysOnSite()]);
+const [work, rels, essays, siteSlugs] = await Promise.all([
+  recentWork(),
+  releases(),
+  latestEssays(),
+  essaysOnSite(),
+]);
 
 let readme = await readFile("README.md", "utf8");
 readme = replaceBlock(readme, "work", work);
 readme = replaceBlock(readme, "releases", rels);
+readme = replaceBlock(readme, "essays", essays);
 await writeFile("README.md", readme);
 
 const missing = siteSlugs.filter((slug) => !readme.includes(`/work/${slug}/`));
@@ -114,4 +153,7 @@ if (missing.length) {
   console.log(`drift: essays on the site but not in README -> ${missing.join(", ")}`);
 }
 
-console.log(`work rows: ${work ? work.split("\n").length - 2 : 0}, releases: ${rels ? "yes" : "none"}`);
+console.log(
+  `work rows: ${work ? work.split("\n").length - 2 : 0}, ` +
+    `essays: ${essays ? essays.split("\n").length : 0}, releases: ${rels ? "yes" : "none"}`,
+);
