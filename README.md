@@ -52,11 +52,11 @@ Rebuilt daily from the GitHub API — most recently pushed repositories and wher
 <!-- work:start -->
 | Repo | Latest commit | Date |
 |---|---|---|
+| [agent-evaluator](https://github.com/quocdungTlu/agent-evaluator) | Merge OpenAI judge adapter: prove the provider contract | 2026-08-18 |
+| [day26-wrong-problem-lab](https://github.com/quocdungTlu/day26-wrong-problem-lab) | Add Day 26 design thinking prototype | 2026-08-18 |
 | [portfolio](https://github.com/quocdungTlu/portfolio) | Trigger Vercel deploy: verify GitHub integration is connected | 2026-08-17 |
-| [agent-evaluator](https://github.com/quocdungTlu/agent-evaluator) | Add agent-evaluator: meta-agent grader with deterministic normalizer | 2026-08-17 |
 | [quocdungtlu.github.io](https://github.com/quocdungTlu/quocdungtlu.github.io) | Fail the audit run when no essay could be audited at all | 2026-08-17 |
 | [UBNDAI](https://github.com/quocdungTlu/UBNDAI) | TTHC Assist (UBNDAI): trợ lý AI hướng dẫn và kiểm tra hồ sơ thủ tục hành chính | 2026-07-20 |
-| [C2-App-031](https://github.com/quocdungTlu/C2-App-031) | Merge pull request #116 from AI20K-Build-Cohort-2/docs/pitch-6min-4qa | 2026-07-08 |
 <!-- work:end -->
 
 <!-- releases:start -->
