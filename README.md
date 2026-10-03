@@ -52,11 +52,11 @@ Rebuilt daily from the GitHub API — most recently pushed repositories and wher
 <!-- work:start -->
 | Repo | Latest commit | Date |
 |---|---|---|
+| [medanatomy-3d](https://github.com/quocdungTlu/medanatomy-3d) | Thêm pull_all.ps1 cho Windows | 2026-10-03 |
 | [portfolio](https://github.com/quocdungTlu/portfolio) | feat: cập nhật profile sau thực tập VinSmart Future | 2026-08-22 |
 | [agent-evaluator](https://github.com/quocdungTlu/agent-evaluator) | Merge OpenAI judge adapter: prove the provider contract | 2026-08-18 |
 | [day26-wrong-problem-lab](https://github.com/quocdungTlu/day26-wrong-problem-lab) | Add Day 26 design thinking prototype | 2026-08-18 |
 | [quocdungtlu.github.io](https://github.com/quocdungTlu/quocdungtlu.github.io) | Fail the audit run when no essay could be audited at all | 2026-08-17 |
-| [UBNDAI](https://github.com/quocdungTlu/UBNDAI) | TTHC Assist (UBNDAI): trợ lý AI hướng dẫn và kiểm tra hồ sơ thủ tục hành chính | 2026-07-20 |
 <!-- work:end -->
 
 <!-- releases:start -->
